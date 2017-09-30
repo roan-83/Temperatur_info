@@ -2,7 +2,7 @@
 
 #define TINY_GSM_MODEM_SIM800
 #define TINY_GSM_RX_BUFFER 512
-#define SerialAT Serial1
+//#define SerialAT Serial1
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <TinyGsmClient.h>
@@ -12,6 +12,15 @@ const char apn[]  = "internet.mts.ru";
 const char user[] = "mts";
 const char pass[] = "mts";
 const char server[] = "narodmon.ru";
+
+#include <StreamDebugger.h>
+StreamDebugger debugger(Serial1, Serial);
+TinyGsm modem(debugger);
+TinyGsmClient client(modem);
+
+int ch = 0;
+String ts;
+String val = "";
 
 void setup() {
   delay(2000);  //время на инициализацию модуля
